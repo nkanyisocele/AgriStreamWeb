@@ -1,0 +1,8 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "AzureStorageConnection": "DefaultEndpointsProtocol=https;AccountName=agristreamstorage56037;AccountKey=6L7u4s/2xWc4MheZDwGJKinp+TXbpT+9qTI1jlFtQ3BFAtWtkTIUDKNoCMoaFg7XvwmMmbNKmO64+AStF2/T5Q==;EndpointSuffix=core.windows.net"
+  }
+}
