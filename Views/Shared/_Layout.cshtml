@@ -19,14 +19,42 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 justify-content-between">
+                        <!-- Main Left-Aligned Core Application Navigation Links -->
+                        <div class="d-flex">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                    </ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Telemetry" asp-action="Dashboard">Sensor Dashboard</a>
+                        </li>
+
+                        <!-- Task C: Drone Upload Portal Trigger Button -->
+                        <li class="nav-item ms-2">
+                            <a class="btn btn-outline-primary btn-sm my-1" asp-area="" asp-controller="Drone" asp-action="Upload">
+                                Drone Imagery Portal
+                            </a>
+                        </li>
+                </div>
+
+                <!-- Task A & B: Right-Aligned Portal Authentication Access Buttons -->
+                <div class="d-flex align-items-center">
+                    <li class="nav-item me-2">
+                        <a class="btn btn-sm btn-success text-white px-3" asp-area="" asp-controller="Account" asp-action="Login">
+                            Sign In
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-secondary text-white px-3" asp-area="" asp-controller="Account" asp-action="Register">
+                            Register Account
+                        </a>
+                    </li>
+                </div>
+                </ul>
+
                 </div>
             </div>
         </nav>

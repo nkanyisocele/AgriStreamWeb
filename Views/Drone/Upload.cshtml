@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Drone Upload Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">AgriStream Satellite & Drone Imagery Portal</h3>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Use this portal to upload high-resolution NVDI field telemetry mapping captures directly to the secure enterprise data lake repository.</p>
+
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> @ViewBag.Message
+                </div>
+            }
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> @ViewBag.Error
+                </div>
+            }
+
+            <form asp-action="Upload" method="post" enctype="multipart/form-data" class="mt-4">
+                <div class="mb-3">
+                    <label for="imageFile" class="form-label font-weight-bold">Select Imagery Capture File (.jpg, .png, .tiff)</label>
+                    <input type="file" name="imageFile" id="imageFile" class="form-control" accept=".jpg,.jpeg,.png,.tiff" required />
+                </div>
+                <button type="submit" class="btn btn-success px-4">Upload to Data Lake</button>
+            </form>
+        </div>
+    </div>
+</div>

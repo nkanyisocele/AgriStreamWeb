@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AgriStreamWeb.Models.TelemetryRow>
+@{
+    ViewData["Title"] = "IoT Field Metrics";
+}
+
+<div class="container mt-4">
+    @if (TempData["QueueMessage"] != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            🚀 <strong>Queue Update:</strong> @TempData["QueueMessage"]
+        </div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>🌾 Live Zonal IoT Telemetry Stream (NoSQL)</h2>
+
+        <div class="d-flex gap-2">
+            <!-- Task D: Asynchronous serverless queue workflow dispatch trigger button -->
+            <form asp-controller="Command" asp-action="TriggerIrrigation" method="post" class="me-2">
+                <input type="hidden" name="zoneId" value="4" />
+                <button type="submit" class="btn btn-warning shadow-sm">💧 Trigger Zone 4 Irrigation</button>
+            </form>
+
+            <form asp-action="AddMockRecord" method="post">
+                <button type="submit" class="btn btn-primary shadow-sm">+ Simulate Sensor Broadcast</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Device Tracking ID</th>
+                        <th>Timestamp (UTC)</th>
+                        <th>Soil Moisture Condition</th>
+                        <th>Ambient Heat Metric</th>
+                        <th>Unique Cloud RowKey</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">No telemetry logs found. Click the simulation button above to generate stream inputs.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var log in Model.OrderByDescending(l => l.Timestamp))
+                        {
+                            <tr>
+                                <td class="font-weight-bold text-secondary">@log.DeviceId</td>
+                                <td>@log.Timestamp?.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                <td>
+                                    <span class="badge @(log.SoilMoisturePercentage < 35 ? "bg-danger" : "bg-success")">
+                                        @log.SoilMoisturePercentage %
+                                    </span>
+                                </td>
+                                <td>@log.AmbientTemperature °C</td>
+                                <td class="text-monospace small text-muted">@log.RowKey</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
